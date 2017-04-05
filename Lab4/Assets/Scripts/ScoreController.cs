@@ -17,9 +17,9 @@ public class ScoreController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         var encounteredObject = other.gameObject;
-        if (encounteredObject.CompareTag("Target") && encounteredObject.GetComponent<ConstantForce>().torque == new Vector3(20, 0, 0))
+		if (encounteredObject.CompareTag("Target") && encounteredObject.GetComponent<Rigidbody>().angularDrag == 0)
         {
-            encounteredObject.GetComponent<ConstantForce>().torque = new Vector3(40, 0, 0);
+            encounteredObject.GetComponent<Rigidbody>().angularDrag = 0.05f;
             HandleObjectCollision(other.gameObject, 1);
         }
     }
@@ -34,6 +34,6 @@ public class ScoreController : MonoBehaviour
     // Reproduce the score text.
     private void RefreshCountText()
     {
-        ScoreText.text = "Score: " + score.ToString();
+        scoreText.text = "Score: " + score.ToString();
     }
 }
